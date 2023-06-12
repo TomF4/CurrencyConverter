@@ -1,0 +1,47 @@
+﻿@using System.Collections;
+@model CurrencyConversion
+
+@{
+    ViewBag.Title = "Currency Converter";
+}
+
+<h2>Currency Converter</h2>
+
+@using (Html.BeginForm("Convert", "CurrencyConversion", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(model => model.UserEnteredAmount)
+    @Html.EditorFor(model => model.UserEnteredAmount)
+    <br />
+
+    @Html.LabelFor(model => model.FromCurrency)
+    @Html.DropDownListFor(model => model.FromCurrency, new SelectList((IEnumerable)ViewBag.FromCurrencies))
+    <br />
+
+    @Html.LabelFor(model => model.ToCurrency)
+    @Html.DropDownListFor(model => model.ToCurrency, new SelectList((IEnumerable)ViewBag.ToCurrencies))
+    <br />
+
+    <input type="submit" value="Convert" />
+    <br />
+
+    if (Model != null && !ViewData.ModelState.IsValid && Model.Result != 0)
+    {
+        <h3>Result: @Model.Result @Model.ToCurrency</h3>
+    }
+}
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Amount').keypress(function (event) {
+                if (event.which != 8 && isNaN(String.fromCharCode(event.which))) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+}

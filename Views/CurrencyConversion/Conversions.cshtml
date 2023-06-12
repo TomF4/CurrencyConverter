@@ -1,0 +1,33 @@
+﻿@model List<CurrencyConversion>
+
+@{
+    ViewBag.Title = "Conversions";
+}
+
+<h2>Conversions</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>From Currency</th>
+            <th>To Currency</th>
+            <th>ConversionRate</th>
+            <th>UserEnteredAmount</th>
+            <th>Result</th>
+            <th>Conversion Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var conversion in Model)
+        {
+            <tr>
+                <td>@conversion.FromCurrency</td>
+                <td>@conversion.ToCurrency</td>
+                <td>@conversion.ConversionRate</td>
+                <td>@conversion.UserEnteredAmount</td>
+                <td>@conversion.Result</td>
+                <td>@conversion.ConversionDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
